@@ -29,3 +29,5 @@ typing-extensions==3.7.4.3
 urllib3==1.25.8
 webencodings==0.5.1
 yarl==1.6.3
+aniso8601==8.0.0
+click==7.1.2

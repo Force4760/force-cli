@@ -2,21 +2,38 @@ import scrython
 import json
 import os
 
-def add_card(name, deck, number):
+def add_card(name: str, deck: str, number: int = 1, section: str = "main" ):
+    """Adds a card (card) to a specified deck (deck)\n
+       if the card is already on the deck it will add the (number) to the current number on the card\n
+       name -> str -> name of the card\n
+       deck -> str -> name of the deck\n
+       number -> int -> number of cards to add (defaults to 1)\n
+       section -> str -> section to put the card (main/side/maybe)
+    """    
+    # check section   
+    if section.lower() == "side":
+        sec = "Side Board"
+    elif section.lower() == "maybe":
+        sec = "Maybe Board"
+    else:
+        sec = "Main Board"
+
+
     filename = f"./decks/{deck}.json"
     try:
-        sd = scrython.cards.Named(exact=name)  
+        sd = scrython.cards.Named(exact=name) # get card  
 
-        try:
-            power = sd.power()
+        try: # some cards don't have power
+            power = sd.power() 
         except:
             power = "none"
 
-        try:
+        try: # some cards don't have toughness
             tou = sd.toughness()
         except:
             tou = "none"
 
+        # card object
         card = {
                 "number": number,
                 "name": sd.name(),
@@ -32,15 +49,15 @@ def add_card(name, deck, number):
                 "legality": sd.legalities()
             }
         
-        
+        # open deck file
         with open(filename, 'r') as f:
             data = json.load(f)
-            if name in data["Main Board"]:
-                data["Main Board"][name]["number"] += number
+            if name in data[sec]: # if is already on the deck
+                data[sec][name]["number"] += number
             else:
-                data["Main Board"][name] = card
+                data[sec][name] = card
                
-
+        # recreate file
         os.remove(filename)
         with open(filename, 'w') as f:
             json.dump(data, f, indent=4)
@@ -48,4 +65,6 @@ def add_card(name, deck, number):
     except:
         "Sorry! I couldn't find this card or this deck.'"
 
-add_card("Black Lotus", "elves_modern", 1)
+
+if __name__ == "__main__":
+    add_card("Black Lotus", "elves_modern", 3, "main")

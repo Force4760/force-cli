@@ -1,14 +1,20 @@
 import json
 import os
 
-def create_deck(name, form):
-    if not name:
+def create_deck(name: str, form: str = free):
+    """Create a deck with the given name (name) and for the specified format (form)\n
+       if the deck already exists it throws an exception\n
+       name -> str -> name of the deck\n
+       form -> str -> format of the deck (defaults to free)"""
+
+    if not name: # check if name was given (ie not "")
         print("Sorry! I couldn't understand.'")
     else:
         fileName = f"decks/{name}.json"
-        if os.path.isfile(fileName):
+        if os.path.isfile(fileName): # check if deck already exists
             print("Sorry! That Deck already exists. Please choose a new name.\n")
-        else:      
+        else:
+            # deck object      
             deck = {
                 "Name": name,
                 "Format": form,
@@ -16,6 +22,7 @@ def create_deck(name, form):
                 "Side Board": {},
                 "Maybe Board": {},
             }
+            # open file
             with open(fileName, 'w') as f:
                 json.dump(deck, f, indent=4)
             print(f"The deck {name} for the {form} format was successfully created!\n")
