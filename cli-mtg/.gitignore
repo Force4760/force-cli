@@ -1,5 +1,5 @@
 mtg/
 decks/*
-exports/
+exports/*
 .vscode/
-token.0
+__pycache__/

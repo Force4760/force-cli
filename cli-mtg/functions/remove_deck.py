@@ -1,19 +1,23 @@
 import os
 
 def delete(deck: str):
-    """Delete a deck"""
+    """Delete a deck\n
+       deck -> str -> name of the deck"""
 
-    deckFileName = f"./decks/{deck}.json"
+    deck_file_name = f"./decks/{deck}.json"
 
+    # ask confirmation
     resp = input("Are you sure you want to delete? (y) ")
     
+    # check answer
     if resp == "y" or resp == "Y" or resp == "YES" or resp == "yes":
-        try:
-            os.remove(deckFileName)
+        try: # remove deck
+            os.remove(deck_file_name)
             print("The deck was deleted!")
-        except:
+        except: # deck does not exist
             print("The deck does not exist!")
     else:
         print("The deck was not deleted!")
 
-delete("fsgs")
+if __name__ == "__main__":
+    delete("fsgs")

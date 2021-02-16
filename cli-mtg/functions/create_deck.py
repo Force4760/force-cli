@@ -10,8 +10,8 @@ def create_deck(name: str, form: str = free):
     if not name: # check if name was given (ie not "")
         print("Sorry! I couldn't understand.'")
     else:
-        fileName = f"decks/{name}.json"
-        if os.path.isfile(fileName): # check if deck already exists
+        file_name = f"decks/{name}.json"
+        if os.path.isfile(file_name): # check if deck already exists
             print("Sorry! That Deck already exists. Please choose a new name.\n")
         else:
             # deck object      
@@ -23,7 +23,7 @@ def create_deck(name: str, form: str = free):
                 "Maybe Board": {},
             }
             # open file
-            with open(fileName, 'w') as f:
+            with open(file_name, 'w') as f:
                 json.dump(deck, f, indent=4)
             print(f"The deck {name} for the {form} format was successfully created!\n")
 

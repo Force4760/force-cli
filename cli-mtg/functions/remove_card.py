@@ -18,13 +18,13 @@ def remove_card(name: str, deck: str, number:int = 0, section: str = "main"):
     else:
         sec = "Main Board"
 
-    filename = f"./decks/{deck}.json"
+    file_name = f"./decks/{deck}.json"
     try:
         # if number is given
         if number:
             
             # open file
-            with open(filename, 'r') as f:
+            with open(file_name, 'r') as f:
                 data = json.load(f)
                 if name in data[sec]:
                     data[sec][name]["number"] -= number
@@ -34,21 +34,21 @@ def remove_card(name: str, deck: str, number:int = 0, section: str = "main"):
                     print("Sorry! That card is not on that deck.")
 
             # recreate file
-            os.remove(filename)
-            with open(filename, 'w') as f:
+            os.remove(file_name)
+            with open(file_name, 'w') as f:
                 json.dump(data, f, indent=4)
 
         # completely remove the card   
         else: 
-            with open(filename, 'r') as f:
+            with open(file_name, 'r') as f:
                 data = json.load(f)
                 if name in data[sec]:
                     data[sec].pop(name)
                 else:
                     print("Sorry! That card is not on that deck.")
 
-            os.remove(filename)
-            with open(filename, 'w') as f:
+            os.remove(file_name)
+            with open(file_name, 'w') as f:
                 json.dump(data, f, indent=4)
 
     except:
