@@ -88,10 +88,12 @@ a .cost{
     .list{
         width:100%;
     }
-    .card-view{
+    #card-view{
         display: inline;
+        max-height: 468px;
         min-height: 468px;
         background: var(--darker);
+        max-width: 336px;
         min-width: 336px;
         margin: 2.5rem;
         border-radius: 20px;
