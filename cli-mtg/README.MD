@@ -1,3 +1,5 @@
+# I'm not working in this cli app anymore. I'm building a similar discord bot so maybe one day I will reopen this and make this a cli version of the bot. If you want to use this you are free to use it and mod it to you delight. 
+
 # MTG CLI
 Are you a MTG (Magic: the Gathering) lover like me?
 
